@@ -5,20 +5,21 @@ from entites.Entity import Entity
 
 class Ball(Entity):
 
-    def __init__(self, scene):
+    def __init__(self, scene, n, total):
         super().__init__(scene)
         self.vel = 230
+        self.n = n
+        self.total = total
         self.stopTimer = Timer(2)
 
     def start(self):
         self.turtle.color("white")
         self.turtle.shape("circle")
-
         self.reset()
 
     def reset(self):
         self.stopTimer.start()
-        self.turtle.goto(0, 0)
+        self.turtle.goto(0, (self.n * 20) - ((self.total * 20) / 2))
         self.launch()
 
     def launch(self):
@@ -38,7 +39,9 @@ class Ball(Entity):
 
     def hit(self, player):
         a = self.turtle.heading()
-        self.turtle.setheading(180 - a)
+        self.vel += self.vel * 0.01
+        r = Random(self.vel)
+        self.turtle.setheading((180 - a) + r.randint(0, 10))
 
     def update(self, delta):
         x = self.turtle.xcor()
