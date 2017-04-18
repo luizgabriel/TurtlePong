@@ -1,3 +1,4 @@
+import time
 from turtle import *
 from scenes.PongScene import PongScene
 
@@ -20,6 +21,12 @@ class Game:
         return self.screen.window_height()
 
     def main_loop(self):
+        start_time = time.time()
+        delta = 0
         while self.running:
-            self.scene.update()
+            self.screen.listen()
+            self.scene.update(delta)
             self.screen.update()
+            cur_time = time.time()
+            delta = cur_time - start_time
+            start_time = cur_time

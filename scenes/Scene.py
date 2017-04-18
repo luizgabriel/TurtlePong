@@ -8,6 +8,6 @@ class Scene:
         self.entities.append(entity)
         entity.start()
 
-    def update(self):
+    def update(self, delta):
         for s in self.entities:
-            s.update()
+            s.update(delta)

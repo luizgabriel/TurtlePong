@@ -1,19 +1,24 @@
 import time
 from random import Random
+from Timer import Timer
 from entites.Entity import Entity
 
 class Ball(Entity):
 
     def __init__(self, scene):
         super().__init__(scene)
-        self.vel = 0.08
-        self.stopTime = 2500
-        self.stopTimer = -1
+        self.vel = 230
+        self.stopTimer = Timer(2)
 
     def start(self):
         self.turtle.color("white")
         self.turtle.shape("circle")
 
+        self.reset()
+
+    def reset(self):
+        self.stopTimer.start()
+        self.turtle.goto(0, 0)
         self.launch()
 
     def launch(self):
@@ -25,24 +30,27 @@ class Ball(Entity):
         else:
             self.turtle.left(180 + random.randint(-45, 45))
 
-    def update(self):
+    def x(self):
+        return self.turtle.xcor()
+
+    def y(self):
+        return self.turtle.ycor()
+
+    def hit(self, player):
+        a = self.turtle.heading()
+        self.turtle.setheading(180 - a)
+
+    def update(self, delta):
         x = self.turtle.xcor()
         y = self.turtle.ycor()
         w = self.scene.game.width()
         h = self.scene.game.height()
         a = self.turtle.heading()
 
-        if x > w or x < -w:
-            self.launch()
-            self.turtle.goto(0, 0)
-            self.stopTimer = 0
+        self.stopTimer.update(delta)
 
-
-        if self.stopTimer != -1:
-            if self.stopTimer >= self.stopTime:
-                self.stopTimer = -1
-            else:
-                self.stopTimer += 1
+        if x > w/2 or x < -w/2:
+            self.reset()
 
         if y >= h/2:
             self.turtle.setheading(-a)
@@ -50,7 +58,7 @@ class Ball(Entity):
         if y <= -h/2:
             self.turtle.setheading(360 - a)
 
-        if self.stopTimer == -1:
-            self.turtle.forward(self.vel)
+        if self.stopTimer.is_off():
+            self.turtle.forward(self.vel * delta)
 
 
