@@ -39,7 +39,6 @@ class Ball(Entity):
 
     def hit(self, player):
         a = self.turtle.heading()
-        self.vel += self.vel * 0.01
         r = Random(self.vel)
         self.turtle.setheading((180 - a) + r.randint(0, 10))
 

@@ -3,8 +3,8 @@ from entites.Field import Field
 from entites.Player import Player
 from scenes.Scene import Scene
 
-class PongScene(Scene):
 
+class PongScene(Scene):
     def __init__(self, game):
         super().__init__(game)
         self.game.screen.bgcolor(0, 0, 0)
@@ -19,15 +19,16 @@ class PongScene(Scene):
         self.createPlayer2()
 
     def update(self, delta):
-        #player 1
         for ball in self.balls:
+
+            # player 1
             if ball.x() < self.player1.x() + self.player1.height / 2:
-                if ball.y() <  self.player1.y() + self.player1.width/2 and ball.y() > self.player1.y() - self.player1.width/2:
+                if self.player1.y() + self.player1.width // 2 > ball.y() > self.player1.y() - self.player1.width // 2:
                     ball.hit(self.player1)
 
-            #player 2
+            # player 2
             if ball.x() > self.player2.x() - self.player2.height / 2:
-                if ball.y() <  self.player2.y() + self.player2.width/2 and ball.y() > self.player2.y() - self.player2.width/2:
+                if self.player2.y() + self.player2.width // 2 > ball.y() > self.player2.y() - self.player2.width // 2:
                     ball.hit(self.player2)
 
         super().update(delta)
