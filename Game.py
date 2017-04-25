@@ -12,7 +12,6 @@ class Game:
         self.screen.title("Pong Game")
         self.screen.setup(800, 600)
         self.scene = PongScene(self)
-        self.main_loop()
 
     def width(self):
         return self.screen.window_width()

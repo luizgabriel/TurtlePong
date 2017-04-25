@@ -1,19 +1,18 @@
-from turtle import Shape
 from entites.Entity import Entity
 
 class Player(Entity):
 
     def __init__(self, scene, n):
         super().__init__(scene)
-        self.vel = 320
+        self.vel = 500
         self.n = n
         self.width = 100
         self.height = 20
         self.cur_y = 0
         self.up = False
         self.down = False
-        self.up_keys = { 1:["W", "w"] , 2: ["Up"]}
-        self.down_keys = { 1:["S", "s"] , 2: ["Down"]}
+        self.up_keys = { 1:["W", "w"] , 2: ["Up"] }
+        self.down_keys = { 1:["S", "s"] , 2: ["Down"] }
         if self.n == 1:
             self.start_x = -self.scene.game.width() / 2 + 10
         else:

@@ -7,7 +7,7 @@ class Ball(Entity):
 
     def __init__(self, scene, n, total):
         super().__init__(scene)
-        self.vel = 230
+        self.vel = 400
         self.n = n
         self.total = total
         self.stopTimer = Timer(2)

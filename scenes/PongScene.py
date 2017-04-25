@@ -8,7 +8,7 @@ class PongScene(Scene):
     def __init__(self, game):
         super().__init__(game)
         self.game.screen.bgcolor(0, 0, 0)
-        self.balls_count = 3
+        self.balls_count = 1
         self.balls = []
 
         for b in range(self.balls_count):
